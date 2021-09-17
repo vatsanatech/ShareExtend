@@ -64,6 +64,11 @@ public class Share {
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_TEXT, list.get(0));
             shareIntent.setType("text/plain");
+        } else if ("whatsapp".equals(type)) {
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, list.get(0));
+            shareIntent.setPackage("com.whatsapp");
+            shareIntent.setAction(Intent.ACTION_SEND);
         } else {
             if (ShareUtils.shouldRequestPermission(list)) {
                 if (!checkPermission()) {
@@ -83,6 +88,12 @@ public class Share {
                 shareIntent.setType("video/*");
             } else if ("audio".equals(type)) {
                 shareIntent.setType("audio/*");
+            } else if ("whatsapp_image".equals(type)) {
+                shareIntent.setType("image/*");
+                shareIntent.setPackage("com.whatsapp");
+            } else if ("whatsapp_video".equals(type)) {
+                shareIntent.setType("video/*");
+                shareIntent.setPackage("com.whatsapp");
             } else {
                 shareIntent.setType("application/*");
             }
